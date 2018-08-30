@@ -26,11 +26,13 @@ module Authority
     end
 
     def self.authorized_classes
-      if class_variable_defined?(:@@authorized_classes)
-        @@authorized_classes.freeze
+      result = if class_variable_defined?(:@@authorized_classes)
+        @@authorized_classes
       else
-        [].freeze
+        []
       end
+
+      result.clone.freeze
     end
 
     def authorizer
